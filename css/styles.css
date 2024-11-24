@@ -1,0 +1,100 @@
+/*Général*/
+.mountains-of-christmas-regular {
+    font-family: "Mountains of Christmas", serif;
+    font-weight: 400;
+    font-style: bold;
+  }
+  
+  .mountains-of-christmas-bold {
+    font-family: "Mountains of Christmas", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+* {
+    
+    margin: 0;
+    padding: 0;
+    font-family: "Mountains of Christmas";
+}
+
+body {    
+    height: 100%;
+    width: auto;
+    overflow: hidden;
+}
+
+body::before { /*avant contenu principal*/
+    content:""; 
+    position: absolute;  
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("../images/noel_robot.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.7;
+    z-index: -99;
+}
+
+
+/*Header*/
+h1 {
+    text-align: center;
+    padding-top: 4%;
+    color: pink;
+    cursor:pointer;
+    transition: transform 1000ms;
+}
+
+h1:hover {
+    transform:scale(1.15);
+}
+
+/*Main*/
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section {
+    width: 80%;
+    height: auto;
+    padding-top: 5%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 5em);
+    gap: 3%;   
+}
+
+section div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    color: navy;
+    box-shadow: 
+        0 12px 24px rgba(0, 0, 0, 0.6), /* Ombre externe */
+        0 12px 10px rgba(255, 255, 255, 0.6) inset, /* Ombre interne claire */
+        0 -10px 20px rgba(0, 0, 0,  0.7) inset; /* Ombre interne sombre */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.calendrier div:hover { /*effet .calendriera:hover*/
+    transform: translateX(-8px) translateY(-8px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 1), /* Ombre plus marquée au survol */
+                0 16px 14px rgba(255, 255, 255, 0.6) inset,
+                0 -12px 24px rgba(0, 0, 0.6) inset,
+                0 0 25px rgba(255, 255, 255, 0.1);  
+}
+
+/* .case {
+    width: 30%;    
+} */
+
+
