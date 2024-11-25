@@ -1,6 +1,10 @@
+import { citations } from './data.js';
+
 const section = document.querySelector('section');
 const cases = document.createElement('div');
 cases.classList.add('case');
+const popup = document.createElement('div');
+popup.classList.add("popup");
 
 const colors = [
     '#8B5F33', '#E0A96D', '#7C4E2F', '#B97B2F', '#C78203', '#9A6E3B',
@@ -9,16 +13,18 @@ const colors = [
     '#B97B2F', '#A56E3C', '#936F56', '#D89B5A', '#8D6E4B', '#7A513C'
 ]; 
 
-
 function afficherCalendrier() {   
     for(let i = 1; i <= 24; i++){ //obligé de passer par for
-        const newCase = cases.cloneNode() 
+        const newCase = cases.cloneNode(true) 
         newCase.classList.add('case');       
         newCase.innerText = i;
-        section.appendChild(newCase);        
+        section.appendChild(newCase);   
+
+        const newPopup = popup.cloneNode(true);
+        newCase.appendChild(newPopup);
     }
     shuffleCases();
-    shuffleColors();
+    shuffleColors();    
 }
 
 function shuffleCases() { 
@@ -54,11 +60,19 @@ function shuffleColors() {
     }
 
     let colorsShuffle = Array.from(section.children);//new tableau de new colors
-    
+
     for (let i = 0; i < colorsShuffle.length; i++) {
         colorsShuffle[i].style.backgroundColor = colors[i]; // Je réattribue les new colors
     }
 }
+
+// function openPopup() {
+//     newCase.addEventListener() {
+//         /* ici je dois vérifier que si je clic sur la case 1 alors 
+//         jaffiche la citation1 du data.js etc*/
+
+//     }
+// }
 
 afficherCalendrier();
 
@@ -67,7 +81,9 @@ afficherCalendrier();
 //Mélanger avec math.random les numéros
 //Mélanger avec math.random les couleurs
 
-//Créer une popup : comment? je sais pas encore
+/*Créer une popup : */
+
+
 /*Afficher un text
 Modifier l'aspect de la case
 Afficher un emoticone > remplacer dans le tableau*/
