@@ -54,15 +54,17 @@ h1:hover {
 
 /*Main*/
 main {
+    width:100%;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 section {
-    width: 80%;
-    height: auto;
-    padding-top: 5%;
+    width:80%;
+    height: 100%;
+    padding-top: 20%;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(4, 5em);
@@ -84,7 +86,7 @@ section div {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.calendrier div:hover { /*effet .calendriera:hover*/
+.case div:hover { /*effet .calendriera:hover*/
     transform: translateX(-8px) translateY(-8px);
     box-shadow: 0 16px 32px rgba(0, 0, 0, 1), /* Ombre plus marquée au survol */
                 0 16px 14px rgba(255, 255, 255, 0.6) inset,
@@ -94,25 +96,40 @@ section div {
 
 /*Popup*/
 .popup {
-    display: none;
-    position: fixed;
-    /* position: relative; */
-    /* padding: 0.5% 6% 6% 6%;
+    display: none; 
+    position: absolute; 
+    top: 39%;
+    left: 9%;
+    padding: 2% 6% 6% 6%;
     border-radius: 15px;
     background-color: rgba(128, 145, 165, 0.8);
     color: #F7E0A3;
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin:5%;    
+    margin:5%;
     font-size: 1.4em;
-    z-index: 10; */
+    z-index: 10;
+    width: 60%;
 }
 
-/* class pour X fermeture
 .close {
     text-align: right;
-    padding-bottom: 5%;
+    padding-bottom: 3%;
+}
+
+
+/* @keyframes flip {
+    0% {
+        transform: rotateY(0);
+    }
+    100% {
+        transform: rotateY(180deg);
+    }
+}
+
+section div:active {
+    animation: flip 0.5s forwards;
 } */
 
 

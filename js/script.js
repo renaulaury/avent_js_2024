@@ -68,41 +68,75 @@ function shuffleColors() {
 }
 
 
-let currentIndex = 1; //Case a ouvrir
+let currentIndex = 1; // Début à la case 1
 
 function openPopup() {
+    // Récupérer toutes les cases dans le tableau
     const allCases = Array.from(section.children);
 
+    // Initialement, toutes les popups sont cachées
     for (let i = 0; i < allCases.length; i++) {
         const caseElement = allCases[i];
+        const popupContent = caseElement.querySelector('.popup');
+        popupContent.style.display = 'none'; // Masquer les popups
+    }
 
+    // Ajouter un gestionnaire d'événements à chaque case
+    for (let i = 0; i < allCases.length; i++) {
+        const caseElement = allCases[i];
+        const popupContent = caseElement.querySelector('.popup'); // Récupérer la popup de chaque case
+
+        // Ajouter l'événement au clic sur chaque case
         caseElement.addEventListener('click', () => {
-            const caseNumber = parseInt(caseElement.innerText, 10); // Récupérer le numéro de la case
-            if (caseNumber === currentIndex) {
-                const citation = citations.find((c) => parseInt(c.case, 10) === caseNumber); // Trouver la citation correspondante
+            // Vérifier si l'index de la case cliquée correspond à currentIndex
+            const caseNumber = parseInt(caseElement.innerText); // Récupérer le numéro affiché sur la case
+            if (caseNumber === currentIndex) { // Si le numéro correspond à currentIndex
+                // Vérifier si la popup de cette case est déjà affichée
+                if (popupContent.style.display === 'block') {
+                    // Si la popup est déjà affichée, la cacher
+                    popupContent.style.display = 'none';
+                } else {
+                    // Si la popup n'est pas affichée, afficher la popup
+                    const citationText = citations[caseNumber - 1].texte; // Citation de la case cliquée
+                    popupContent.innerHTML = citationText; // Ajouter texte
 
-                if (citation) {
-                    const popupContent = caseElement.querySelector('.popup');
-                    popupContent.innerHTML = `${citation.texte}`; // Ajouter le texte et l'icône
+                    // Masquer toutes les autres popups
+                    for (let j = 0; j < allCases.length; j++) {
+                        const otherCaseElement = allCases[j];
+                        const otherPopupContent = otherCaseElement.querySelector('.popup');
+                        otherPopupContent.style.display = 'none'; // Masquer les autres popups
+                    }
+
+                    // Afficher la popup de la case cliquée
                     popupContent.style.display = 'block';
-
-                    // Modifier l'apparence de la case
-                    caseElement.style.backgroundColor = '#FFD700'; // Exemple : doré
-                    caseElement.style.color = '#000';
-
-                    // Fermer la popup au clic sur celle-ci
-                    popupContent.addEventListener('click', () => {
-                        popupContent.style.display = 'none';
-                    });
-
-                    // Autoriser la case suivante
-                    currentIndex++;
                 }
+
+                
+
+                // Incrémenter l'index pour la case suivante
+                currentIndex++;
             } else {
-                alert(`Veuillez ouvrir la case ${currentIndex} avant de continuer.`);
+                // Si l'utilisateur clique sur une case qui n'est pas la suivante, afficher une alerte
+                alert("Il faut cliquer sur la case " + currentIndex + " d'abord.");
             }
         });
+        
+    closePopup(popupContent);
     }
+}
+
+function closePopup(popupContent) {
+    popupContent.addEventListener('click', (event) => {
+        // Empêcher la propagation de l'événement pour éviter de fermer la popup quand on clique sur la case
+        event.stopPropagation();
+        // Masquer la popup en cliquant dessus
+        popupContent.style.display = 'none';
+        // Supprimer le texte de la case après la fermeture de la popup
+        const caseElement = popupContent.parentElement; // Récupérer la case qui contient la popup
+        caseElement.innerText = '';         
+        caseElement.style.opacity = '0.5';
+    
+    });
 }
 
 
@@ -114,7 +148,12 @@ afficherCalendrier();
 //Mélanger avec math.random les numéros
 //Mélanger avec math.random les couleurs
 
+/*Faire en sorte de bloquer la retournement des cases if le i pas cliqué alors alert*/
+
 /*Créer une popup : */
+/*qd je clic une popup s ouvre avec mouvement, je recupere le texte modif aspect case*/
+/*close popup au clic*/
+/*affichage d un emoji */
 
 
 /*Afficher un text
