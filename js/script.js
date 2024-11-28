@@ -83,6 +83,7 @@ function openPopup() {
 
     // Ajouter un gestionnaire d'événements à chaque case
     for (let i = 0; i < allCases.length; i++) {
+         
         const caseElement = allCases[i];
         const popupContent = caseElement.querySelector('.popup'); // Récupérer la popup de chaque case
 
@@ -112,16 +113,15 @@ function openPopup() {
                 }
 
                 
-
-                // Incrémenter l'index pour la case suivante
-                currentIndex++;
+                
             } else {
                 // Si l'utilisateur clique sur une case qui n'est pas la suivante, afficher une alerte
                 alert("Il faut cliquer sur la case " + currentIndex + " d'abord.");
             }
         });
         
-    closePopup(popupContent);
+        closePopup(popupContent);
+
     }
 }
 
@@ -133,9 +133,20 @@ function closePopup(popupContent) {
         popupContent.style.display = 'none';
         // Supprimer le texte de la case après la fermeture de la popup
         const caseElement = popupContent.parentElement; // Récupérer la case qui contient la popup
-        caseElement.innerText = '';         
-        caseElement.style.opacity = '0.5';
-    
+        const caseNumber = parseInt(caseElement.innerText);
+
+        console.log('Case Number:', caseNumber);  // Afficher le numéro de la case
+        console.log('Current Index:', currentIndex);
+        if (caseNumber === currentIndex) { // Si le numéro correspond à currentIndex
+            const icone = citations[caseNumber - 1].icone;
+            caseElement.innerText = ''; 
+            caseElement.innerHTML = icone;
+            // Incrémenter l'index pour la case suivante
+            currentIndex++; 
+        }
+                  
+        caseElement.style.opacity = '0.5';  
+        
     });
 }
 
@@ -153,7 +164,7 @@ afficherCalendrier();
 /*Créer une popup : */
 /*qd je clic une popup s ouvre avec mouvement, je recupere le texte modif aspect case*/
 /*close popup au clic*/
-/*affichage d un emoji */
+/*affichage d un emoji */ //> fonctionne pour la 1ere case mais pas les suivantes
 
 
 /*Afficher un text
