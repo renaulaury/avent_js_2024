@@ -25,6 +25,7 @@ function afficherCalendrier() {
     }
     shuffleCases();
     shuffleColors();    
+    openPopup();
 }
 
 function shuffleCases() { 
@@ -66,13 +67,45 @@ function shuffleColors() {
     }
 }
 
-// function openPopup() {
-//     newCase.addEventListener() {
-//         /* ici je dois vérifier que si je clic sur la case 1 alors 
-//         jaffiche la citation1 du data.js etc*/
 
-//     }
-// }
+let currentIndex = 1; //Case a ouvrir
+
+function openPopup() {
+    const allCases = Array.from(section.children);
+
+    for (let i = 0; i < allCases.length; i++) {
+        const caseElement = allCases[i];
+
+        caseElement.addEventListener('click', () => {
+            const caseNumber = parseInt(caseElement.innerText, 10); // Récupérer le numéro de la case
+            if (caseNumber === currentIndex) {
+                const citation = citations.find((c) => parseInt(c.case, 10) === caseNumber); // Trouver la citation correspondante
+
+                if (citation) {
+                    const popupContent = caseElement.querySelector('.popup');
+                    popupContent.innerHTML = `${citation.texte}`; // Ajouter le texte et l'icône
+                    popupContent.style.display = 'block';
+
+                    // Modifier l'apparence de la case
+                    caseElement.style.backgroundColor = '#FFD700'; // Exemple : doré
+                    caseElement.style.color = '#000';
+
+                    // Fermer la popup au clic sur celle-ci
+                    popupContent.addEventListener('click', () => {
+                        popupContent.style.display = 'none';
+                    });
+
+                    // Autoriser la case suivante
+                    currentIndex++;
+                }
+            } else {
+                alert(`Veuillez ouvrir la case ${currentIndex} avant de continuer.`);
+            }
+        });
+    }
+}
+
+
 
 afficherCalendrier();
 
